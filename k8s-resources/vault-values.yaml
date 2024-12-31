@@ -1,0 +1,40 @@
+  server:
+    logLevel: "debug"
+
+    volumes:
+      - name: gcp-sa-key
+        secret:
+          secretName: gcp-sa-key
+
+    volumeMounts:
+      - name: gcp-sa-key
+        mountPath: /etc/secrets
+        readOnly: true
+
+    extraEnvironmentVars:
+      GOOGLE_PROJECT: matcham-gke-playground
+      GOOGLE_APPLICATION_CREDENTIALS: "/etc/secrets/key.json"
+
+    standalone:
+      enabled: true
+      config: |-
+        ui = true
+
+        listener "tcp" {
+          tls_disable = 1
+          address = "[::]:8200"
+          cluster_address = "[::]:8201"
+          # Enable unauthenticated metrics access (necessary for Prometheus Operator)
+          #telemetry {
+          #  unauthenticated_metrics_access = "true"
+          #}
+        }
+        storage "file" {
+          path = "/vault/data"
+        }
+        seal "gcpckms" {
+          project     = "matcham-gke-playground"
+          region      = "global"
+          key_ring    = "vault-keyring"
+          crypto_key  = "vault-key"
+        }
