@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-b
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-b
+  template:
+    metadata:
+      labels:
+        app: app-b
+    spec:
+      containers:
+      - name: app-b
+        image: matcham89/app-b:latest 
+        ports:
+        - containerPort: 5000
+        env:
+        - name: APP_MESSAGE
+          value: "Application B"
+        - name: VAULT_SECRET
+          value: "Connected to Vault"
+        - name: OTHER_SECRET
+          value: "Another Secret"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-b
+spec:
+  selector:
+    app: app-b
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000
