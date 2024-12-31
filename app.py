@@ -7,24 +7,24 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     app_message = os.getenv("APP_MESSAGE", "Default Message")
-    vault_secret = os.getenv("VAULT_SECRET", "Not Connected")
+    secret_name = os.getenv("SECRET_NAME", "Not Connected")
     other_secret = os.getenv("OTHER_SECRET", "Not Set")
-    
+
     # HTML Template to render in the browser
     html_template = """
     <html>
     <head><title>{{ title }}</title></head>
     <body>
         <h1>{{ app_message }}</h1>
-        <p><strong>Vault Secret:</strong> {{ vault_secret }}</p>
+        <p><strong>Vault Secret:</strong> {{ secret_name }}</p>
         <p><strong>Other Secret:</strong> {{ other_secret }}</p>
     </body>
     </html>
     """
     return render_template_string(html_template, 
-                                  title="Environment Variables", 
+                                  title="Application-A", 
                                   app_message=app_message, 
-                                  vault_secret=vault_secret, 
+                                  secret_name=secret_name, 
                                   other_secret=other_secret)
 
 if __name__ == "__main__":
