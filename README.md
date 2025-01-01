@@ -1,22 +1,19 @@
 # local-k8s
 local k8s deployment using kind
+## Configurations
 
-## Vault Auto Unseal Standalone
-[gcp kms auto unseal](./auto-unseal-commands.md)
+### [Vault Auto Unseal Standalone](./vault-auto-unseal-config.md)
 
-## Kind Configuration
-[tbc]()
+### [Google KMS](./gcp-kms-config.md)
 
-## Deployment Configuration
-[tbc]()
+### [Kind](./kind-config.yaml)
 
-## Ingress Configuration
-[tbc]()
+### [Ingress](./k8s-resources/ingress.yaml)
 
-## LoadBalancer Configuration
-[tbc]()
-command: ```/home/matcham/go/bin/cloud-provider-kind```
+### [LoadBalancer Provided By Kind](https://kind.sigs.k8s.io/docs/user/loadbalancer/)
+command: ```/cloud-provider-kind```
 
+### [Ingress Controller Provided By Kind](https://kind.sigs.k8s.io/docs/user/ingress/)
 
 ## Test Application - Python Flask Web App
 
