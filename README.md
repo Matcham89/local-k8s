@@ -2,11 +2,11 @@
 local k8s deployment using kind
 ## Configurations
 
-### [Vault Auto Unseal Standalone](./vault-auto-unseal-config.md)
+### [Vault Auto Unseal Standalone](./docs/vault-auto-unseal-config.md)
 
-### [Google KMS](./gcp-kms-config.md)
+### [Google KMS](./docs/gcp-kms-config.md)
 
-### [Kind](./kind-config.yaml)
+### [Kind](./docs/kind-config.yaml)
 
 ### [Ingress](./k8s-resources/ingress.yaml)
 
