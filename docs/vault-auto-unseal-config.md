@@ -1,5 +1,10 @@
 # auto-unseal vault config
 
+## add vault helm chart
+```sh
+helm repo add hashicorp https://helm.releases.hashicorp.com
+```
+
 ## review the default helm vault vaules
 ```sh 
 helm show values hashicorp/vault > default-values.yaml
