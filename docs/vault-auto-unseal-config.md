@@ -56,7 +56,6 @@ helm show values hashicorp/vault > default-values.yaml
 ## helm command to build vault
 
 ```sh
-helm repo add hashicorp https://helm.releases.hashicorp.com
 helm install vault hashicorp/vault -f vault-values.yaml -n vault --create-namespace
 ```
 # connect to vault init and unseal
