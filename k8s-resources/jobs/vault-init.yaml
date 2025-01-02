@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: vault-init
+  namespace: vault
+spec:
+  template:
+    spec:
+      serviceAccountName: vault
+      containers:
+      - name: vault-init
+        image: hashicorp/vault:1.15.0
+        env:
+        - name: VAULT_ADDR
+          value: "http://vault.vault.svc.cluster.local:8200"
+        - name: VAULT_TOKEN
+          value: "root" # Replace with your root token or appropriate token 
+        command:
+        - /bin/sh
+        - -c
+        - |
+          set -e
+          # Enable KV Secrets Engine
+          vault secrets enable -path=kv-v2 kv-v2
+          # Enable Kubernetes Auth
+          vault auth enable kubernetes
+          # Configure Kubernetes Auth
+          vault write auth/kubernetes/config \
+            kubernetes_host=https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT
+          # Create a Secret
+          vault kv put kv-v2/vault-local/pod-a-secret secret="this is a secret stored in vault"
+          # Create a Policy
+          echo 'path "kv-v2/data/vault-local/pod-a-secret" {
+            capabilities = ["read"]
+          }' | vault policy write vault-local -
+          # Create a Role
+          vault write auth/kubernetes/role/vault-local \
+            bound_service_account_names=vault-local \
+            bound_service_account_namespaces=default \
+            policies=vault-local \
+            ttl=1h
+      restartPolicy: OnFailure
