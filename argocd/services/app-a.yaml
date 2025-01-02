@@ -8,7 +8,7 @@ spec:
   source:
       repoURL: https://github.com/Matcham89/local-k8s.git
       targetRevision: HEAD
-      path: argocd/services/app-a 
+      path: k8s-resources/app-a.yaml
   
   destination:
       server: https://kubernetes.default.svc
