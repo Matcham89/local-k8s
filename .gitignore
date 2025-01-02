@@ -1,8 +1,2 @@
-vault-tokens.md
 *.json
-
-.terraform/*
-
-.terraform*
-
 vault-root-token.md
