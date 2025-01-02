@@ -12,8 +12,8 @@ resource "vault_kv_secret_v2" "pod_a_secret" {
     })
 }
 
-resource "vault_policy" "pod_a_secret_policy" {
-    name = "pod_a_secret_policy"
+resource "vault_policy" "pod_policy" {
+    name = "pod"
     policy = <<EOF
 path "kv-v2/data/vault-local/pod_a_secret" {
     capabilities = ["read"]
@@ -21,3 +21,11 @@ path "kv-v2/data/vault-local/pod_a_secret" {
 EOF
 }
 
+resource "vault_kubernetes_auth_backend_role" "vault_local" {
+    backend = "kubernetes"
+    role_name = "vault_local_role"
+    bound_service_account_names = ["vault-local"]
+    bound_service_account_namespaces = ["default"]
+    token_policies = ["pod"]
+    token_ttl = "1h"
+}
