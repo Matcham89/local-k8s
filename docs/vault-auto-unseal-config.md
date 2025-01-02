@@ -49,8 +49,9 @@ helm show values hashicorp/vault > default-values.yaml
 ```
 
 ## helm command to build vault
+
 ```sh
-helm repo add hasicorp https://helm.releases.hasicorp.com
+helm repo add hashicorp https://helm.releases.hashicorp.com
 helm install vault hashicorp/vault -f vault-values.yaml -n vault --create-namespace
 ```
 # connect to vault init and unseal
@@ -83,7 +84,7 @@ vault login $token
 
 ## create a new secret (kv-v2 is the secret path just enabled in previous step)
 ```sh
-  vault kv put kv-v2/vault-local/pod-a-secret secret_name="this is a secrect name"
+  vault kv put kv-v2/vault-local/pod-a-secret secret="this is a secrect stored in vault and exported with vault injector"
 ```
 
 ## create a role 
@@ -91,15 +92,44 @@ vault login $token
   vault write auth/kubernetes/role/vault-local \
     bound_service_account_names=vault-local \
     bound_service_account_namespaces=default \
-    policies=pod-a-secret \
-    ttl=1h
+    policies=vault-local \
+    ttl=1h  
 ```
 
-## create a policy for secrets
+## create a policy
 ```sh
-  vault policy write pod-a-secret - << EOF
-  path "kv-v2/data/vault-local/pod-a-secret" {
-    capabilities = ["read"]
-  }
-  EOF
+echo 'path "kv-v2/data/vault-local/pod-a-secret" {
+  capabilities = ["read"]
+}' > /tmp/vault-local-policy.hcl
+```
+
+## apply the policy
+```sh
+vault policy write vault-local /tmp/vault-local-policy.hcl
+```
+
+
+
+
+
+# verification
+
+## k8s path
+```sh
+vault read auth/kubernetes/config
+```
+
+## secret
+```sh
+  vault kv get kv-v2/vault-local/pod-a-secret
+```
+
+## role
+```sh
+vault read auth/kubernetes/role/vault-local
+```
+
+## policy
+```sh
+vault policy read vault-local
 ```

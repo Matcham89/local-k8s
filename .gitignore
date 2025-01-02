@@ -4,3 +4,5 @@ vault-tokens.md
 .terraform/*
 
 .terraform*
+
+vault-root-token.md
