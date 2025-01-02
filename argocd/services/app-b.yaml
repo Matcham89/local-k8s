@@ -8,7 +8,7 @@ spec:
   source:
       repoURL: https://github.com/Matcham89/local-k8s.git 
       targetRevision: HEAD
-      path: k8s-resources/app-b.yaml
+      path: k8s-resources/app-b
   destination:
       server: https://kubernetes.default.svc
       namespace: default
