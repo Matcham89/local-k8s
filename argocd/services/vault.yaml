@@ -5,22 +5,16 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  sources:
-    - helm:
-      chart: vault
-      repoURL: https://helm.releases.hashicorp.com
-      targetRevision: 0.24.0
-        valueFiles:
-        - $values/helm/vault-values.yaml
-    - repoURL: ' https://github.com/Matcham89/local-k8s.git '
+  source:
+      repoURL: https://github.com/Matcham89/local-k8s.git 
       targetRevision: HEAD
-      ref: values
+      path: k8s-resources/vault
   destination:
-    server: https://kubernetes.default.svc
-    namespace: vault
+      server: https://kubernetes.default.svc
+      namespace: default
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
     syncOptions:
-      - CreateNamespace=true
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
