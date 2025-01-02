@@ -9,7 +9,7 @@ spec:
   source:
       repoURL: https://github.com/Matcham89/local-k8s
       targetRevision: HEAD
-      path: argocd-config/services
+      path: argocd/services
   
   destination:
       server: https://kubernetes.default.svc
