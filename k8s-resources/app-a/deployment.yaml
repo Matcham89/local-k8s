@@ -34,15 +34,3 @@ spec:
             - name: APP_MESSAGE
               value: "Application A"
 ---
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: app-a
-spec:
-  selector:
-    app: app-a
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 5000

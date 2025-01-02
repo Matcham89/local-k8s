@@ -25,14 +25,3 @@ spec:
         - name: OTHER_SECRET
           value: "Another Secret"
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: app-b
-spec:
-  selector:
-    app: app-b
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 5000
