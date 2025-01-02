@@ -1,6 +1,12 @@
+## vault root token collection
+## requires vault to be initialzed and unsealed
+data "vault_generic_secret" "root_token" {
+    path = "secret/data/vault-local"
+}
+
 provider "vault" {
     address = "http://127.0.0.1:8200"
-    token = var.vault_token
+    token = data.vault_generic_secret.root_token.data["token"]
 }
 
 resource "vault_kv_secret_v2" "pod_a_secret" {
