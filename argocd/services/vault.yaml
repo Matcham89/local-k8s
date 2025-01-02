@@ -5,16 +5,16 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    chart: vault
-    repoURL: https://helm.releases.hashicorp.com
-    targetRevision: 0.24.0
-    helm:
-      valueFiles:
-      - $values/helm/vault-values.yaml
-  - repoURL: ' https://github.com/Matcham89/local-k8s.git '
-    targetRevision: HEAD
-    ref: values
+  sources:
+    - helm:
+      chart: vault
+      repoURL: https://helm.releases.hashicorp.com
+      targetRevision: 0.24.0
+        valueFiles:
+        - $values/helm/vault-values.yaml
+    - repoURL: ' https://github.com/Matcham89/local-k8s.git '
+      targetRevision: HEAD
+      ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: vault
