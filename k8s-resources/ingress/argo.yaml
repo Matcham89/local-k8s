@@ -1,29 +1,19 @@
 apiVersion: networking.k8s.io/v1
-kind: Ingress
+kind: default-Ingress
 metadata:
-  name: app-ingress
+  name: argo-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-  - host: app-a.local
+  - host: argowf.local
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: app-a
-            port:
-              number: 80
-  - host: app-b.local
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: app-b
+            name: argo-server
             port:
               number: 80
