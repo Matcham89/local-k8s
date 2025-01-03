@@ -377,7 +377,7 @@ controller:
   columns: []
   # -- Set ui navigation bar background color
   navColor: ""
-  clusterWorkflowTemplates:
+  clusterWorkflowTem  lates:
     # -- Create a ClusterRole and CRB for the controller to access ClusterWorkflowTemplates.
     enabled: true
     # -- Extra service accounts to be added to the ClusterRoleBinding
