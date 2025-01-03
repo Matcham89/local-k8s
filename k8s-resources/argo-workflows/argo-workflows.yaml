@@ -4,21 +4,6 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: argo-controller-sa
-  namespace: "default"
-  labels:
-    helm.sh/chart: argo-workflows-0.45.3
-    app.kubernetes.io/name: argo-workflows-workflow-controller
-    app.kubernetes.io/instance: argo-workflows
-    app.kubernetes.io/component: workflow-controller
-    app: workflow-controller
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/part-of: argo-workflows
----
-# Source: argo-workflows/templates/controller/workflow-controller-sa.yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: argo-controller-sa
   namespace: "argo"
   labels:
     helm.sh/chart: argo-workflows-0.45.3
