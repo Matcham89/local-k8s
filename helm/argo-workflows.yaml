@@ -333,8 +333,7 @@ controller:
     #   value: "bar"
 
   # -- Extra arguments to be added to the controller
-  extraArgs:
-    - --auth-mode=server
+  extraArgs: []
 
   # -- Additional volume mounts to the controller main container
   volumeMounts: []
@@ -608,8 +607,8 @@ server:
 
   # -- Extra arguments to provide to the Argo server binary.
   ## Ref: https://argo-workflows.readthedocs.io/en/stable/argo-server/#options
-  extraArgs: []
-
+  extraArgs:
+    - --auth-mode=server
   logging:
     # -- Set the logging level (one of: `debug`, `info`, `warn`, `error`)
     level: info

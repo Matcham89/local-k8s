@@ -3419,7 +3419,6 @@ spec:
           - "0"
           - "--log-format"
           - "text"
-          - --auth-mode=server
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -3506,6 +3505,7 @@ spec:
           args:
           - server
           - --configmap=argo-workflows-workflow-controller-configmap
+          - --auth-mode=server
           - "--secure=false"
           - "--loglevel"
           - "info"
