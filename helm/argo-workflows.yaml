@@ -12,5 +12,5 @@ server:
     
   extraArgs:
     - --auth-mode=server
-    
-singleNamespace: false
+
+singleNamespace: true
