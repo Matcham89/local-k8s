@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: default-Ingress
 metadata:
   name: argo-ingress
+  namespace: argo
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -14,6 +15,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: argo-server
+            name: argo-server 
             port:
               number: 80
