@@ -13,7 +13,12 @@ server:
   extraArgs:
     - --auth-mode=server
 
+
 controller:
   workflowNamespaces:
-    - default
     - argo
+  serviceAccount:
+    create: true   
+    name: argo-controller-sa  
+  rbac:
+    create: true
