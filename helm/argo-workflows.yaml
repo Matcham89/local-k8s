@@ -15,10 +15,12 @@ server:
 
 
 controller:
-  workflowNamespaces:
-    - argo
   serviceAccount:
     create: true   
-    name: argo-controller-sa  
-  rbac:
-    create: true
+    name: argo-controller-sa
+  workflowNamespaces:
+    - argo
+clusterWorkflowTemplates:
+  enabled: true
+  serviceAccounts:
+    name: argo-controller-sa
