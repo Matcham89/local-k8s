@@ -17,7 +17,4 @@ server:
 controller: 
   workflowNamespaces:
     - default
-    - argo
-  serviceAccount:
-    create: true
-    name: argo-workflows-sa  
+    - argo  
