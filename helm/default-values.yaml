@@ -98,7 +98,7 @@ controller:
   rbac:
     # -- Adds Role and RoleBinding for the controller.
     create: true
-    # -- Allows controller to get, list, and watch certain k8s secrets
+    # -- Allows controller to get, li st, and watch certain k8s secrets
     secretWhitelist: []
     # -- Allows controller to get, list and watch all k8s secrets. Can only be used if secretWhitelist is empty.
     accessAllSecrets: false
@@ -279,6 +279,7 @@ controller:
   # be created. Only valid when singleNamespace is false.
   workflowNamespaces:
     - default
+    - argo
 
   instanceID:
     # -- Configures the controller to filter workflow submissions
@@ -377,7 +378,7 @@ controller:
   columns: []
   # -- Set ui navigation bar background color
   navColor: ""
-  clusterWorkflowTem  lates:
+  clusterWorkflowTemplates:
     # -- Create a ClusterRole and CRB for the controller to access ClusterWorkflowTemplates.
     enabled: true
     # -- Extra service accounts to be added to the ClusterRoleBinding
