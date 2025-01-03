@@ -6,24 +6,35 @@ metadata:
   namespace: argo
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: argo-workflows-sa-binding
-  namespace: argo
 subjects:
   - kind: ServiceAccount
     name: argo-workflows-sa
     namespace: argo
 roleRef:
-  kind: Role
-  name: argo-workflows-sa-role
+  kind: ClusterRole
+  name: argo-workflows-sa-cluster-role
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+kind: ClusterRoleBinding
 metadata:
-  name: argo-workflows-sa-role
-  namespace: argo
+  name: argo-workflows-sa-binding
+subjects:
+  - kind: ServiceAccount
+    name: argo-workflows-sa
+    namespace: default  
+roleRef:
+  kind: ClusterRole
+  name: argo-workflows-sa-cluster-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: argo-workflows-sa-cluster-role
 rules:
   - apiGroups: ["argoproj.io"]
     resources:

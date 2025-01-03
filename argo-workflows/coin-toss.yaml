@@ -6,7 +6,6 @@
 apiVersion:     .io/v1alpha1
 kind: Workflow
 metadata:
-  namespace: argo           
   generateName: coinflip-
   annotations:
     workflows.argoproj.io/description: |
@@ -17,7 +16,7 @@ spec:
   templates:
   - name: coinflip
     steps:
-    - - name: flip-coin
+    - - name: flip-coin 
         template: flip-coin
     - - name: heads
         template: heads
