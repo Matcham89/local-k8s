@@ -10,7 +10,7 @@ local k8s deployment using kind
 
 ### [LoadBalancer Provided By Kind](https://kind.sigs.k8s.io/docs/user/loadbalancer/)
 
-### [Ingress](./k8s-resources/ingress.yaml)
+### [Ingress](./k8s-resources/ingress/default.yaml)
 
 ### [Google KMS](./docs/1.gcp-kms-config.md)
 
