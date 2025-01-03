@@ -3505,6 +3505,7 @@ spec:
           args:
           - server
           - --configmap=argo-workflows-workflow-controller-configmap
+          - --auth-mode=server
           - "--secure=false"
           - "--loglevel"
           - "info"
@@ -3543,3 +3544,31 @@ spec:
         emptyDir: {}
       nodeSelector:
         kubernetes.io/os: linux
+---
+# Source: argo-workflows/templates/server/server-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argo-workflows-server
+  namespace: "argo"
+  labels:
+    helm.sh/chart: argo-workflows-0.45.3
+    app.kubernetes.io/name: argo-workflows-server
+    app.kubernetes.io/instance: argo-workflows
+    app.kubernetes.io/component: server
+    app: server
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: argo-workflows
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: argowf.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argo-workflows-server
+                port:
+                  number: 2746

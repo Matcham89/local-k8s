@@ -1,16 +1,14 @@
 server:
+
+  extraArgs:
+    - --auth-mode=server
+
   ingress:
-  # -- Enable an ingress resource
-    enabled: false
-    # -- Additional ingress annotations
-    annotations: {}
-    # -- Additional ingress labels
-    labels: {}
-    # -- Defines which ingress controller will implement the resource
+    enabled: true
     ingressClassName: "nginx"
 
     hosts:
       - argowf.local
     
-  extraPaths:
+  extraArgs:
     - --auth-mode=server
