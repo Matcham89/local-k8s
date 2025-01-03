@@ -12,4 +12,9 @@ server:
     
   extraArgs:
     - --auth-mode=server
-      
+
+
+controller: 
+  workflowNamespaces:
+    - default
+    - argo

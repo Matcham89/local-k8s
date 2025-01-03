@@ -16,5 +16,5 @@ subjects:
     namespace: argo
 roleRef:
   kind: Role
-  name: argo-workflows-workflow-controller
+  name: argo-workflows-workflow
   apiGroup: rbac.authorization.k8s.io
