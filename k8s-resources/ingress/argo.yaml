@@ -1,22 +1,22 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: argo-ingress
-  namespace: argo
-  annotations:
-    ingress.kubernetes.io/proxy-body-size: 100M
-    ingress.kubernetes.io/app-root: "/"
-    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-spec:
-  ingressClassName: nginx
-  rules:
-  - host: argowf.local
-    http:
-      paths:
-      - path: /
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: argo-server
-            port:
-              number: 2746
+  # apiVersion: networking.k8s.io/v1
+  # kind: Ingress
+  # metadata:
+  #   name: argo-ingress
+  #   namespace: argo
+  #   annotations:
+  #     ingress.kubernetes.io/proxy-body-size: 100M
+  #     ingress.kubernetes.io/app-root: "/"
+  #     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+  # spec:
+  #   ingressClassName: nginx
+  #   rules:
+  #   - host: argowf.local
+  #     http:
+  #       paths:
+  #       - path: /
+  #         pathType: ImplementationSpecific
+  #         backend:
+  #           service:
+  #             name: argo-server
+  #             port:
+  #               number: 2746
