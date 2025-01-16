@@ -1,12 +1,13 @@
 apiVersion: v1
+
 kind: Service
 metadata:
-  name: app-b
+  name: app-vault
 spec:
   selector:
-    app: app-b
+    app: app-vault
   ports:
   - protocol: TCP
     port: 80
     targetPort: 5000
----
+

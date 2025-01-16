@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-vault
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-vault
+  template:
+    metadata:
+      labels:
+        app: app-vault
+      annotations:
+        # Vault Agent Injection annotations to enable Vault integration in the pod
+        vault.hashicorp.com/agent-inject: "true"  # Tells Vault to inject a Vault agent into the pod
+        vault.hashicorp.com/role: "vault-local"  # Role for Vault to access secrets, providing permission for the pod
+        # Specifies which Vault secret path to inject
+        vault.hashicorp.com/agent-inject-secret-config: "kv-v2/vault-local/local-k8s"  # Secret path to fetch from Vault
+        # Template to format the secrets and inject them into the container as environment variables
+        vault.hashicorp.com/agent-inject-template-config: |
+          {{- with secret "kv-v2/data/vault-local/local-k8s" -}}
+          export SECRET="{{ .Data.data.secret }}"  # Extract the "secret" field from the Vault secret
+          {{- end }}
+    spec:
+      serviceAccountName: vault-local  # Service account with Vault permissions assigned to the pod
+      containers:
+      - name: app-vault
+        image: matcham89/app:latest
+        ports:
+        - containerPort: 5000
+        command:
+        - "sh"
+        - "-c"
+        args:
+        - ". /vault/secrets/config && exec python app.py"  # Load the Vault secrets into environment variables before running the app
+        env:
+        - name: APP_MESSAGE
+          value: "Test Application"  # The environment variable for the application message
+
