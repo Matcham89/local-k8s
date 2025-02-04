@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: app.local
+  - host: app.local.dev
     http:
       paths:
       - path: /
@@ -17,7 +17,7 @@ spec:
             name: app
             port:
               number: 80
-  - host: app-vault.local
+  - host: app-vault.local.dev
     http:
       paths:
       - path: /
